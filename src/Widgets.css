@@ -1,0 +1,9 @@
+.widgets {
+    display: block;
+}
+
+@media (max-width: 1220px) {
+    .widgets {
+        display: none;
+    }
+}

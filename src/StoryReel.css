@@ -1,3 +1,14 @@
 .storyReel {
     display: flex;
+    justify-content: flex-start;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    width: 75%;
+    padding: 10px;
+    height: max-content;
+}
+
+.storyReel__storiesContainer {
+    display: flex;
+    justify-content: center;
 }

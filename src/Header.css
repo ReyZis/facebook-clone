@@ -83,3 +83,14 @@
 .header__right {
     display: flex;
 }
+
+@media (max-width: 900px) {
+    .header__center,
+    .header__info {
+        display: none;
+    }
+
+    .header__right {
+        font-size: 30px;
+    }
+}

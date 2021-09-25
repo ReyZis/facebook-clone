@@ -62,10 +62,6 @@ function Header() {
                 </div>
 
                 <IconButton>
-                    <AddIcon />
-                </IconButton>
-
-                <IconButton>
                     <ForumIcon />
                 </IconButton>
 
