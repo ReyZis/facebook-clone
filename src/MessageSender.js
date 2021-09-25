@@ -1,4 +1,4 @@
-import { Avatar } from "@material-ui/core";
+import { Avatar, Button } from "@material-ui/core";
 import React, { useState } from "react";
 import "./MessageSender.css";
 import VideocamIcon from "@material-ui/icons/Videocam";
@@ -13,16 +13,17 @@ function MessageSender() {
 
     const [input, setInput] = useState("");
     const [imageUrl, setImageUrl] = useState("");
+
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        db.collection("posts").add({
-            message: input,
-            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-            profilePic: user.photoURL,
-            username: user.displayName,
-            image: imageUrl,
-        });
+        input &&
+            db.collection("posts").add({
+                message: input,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                profilePic: user.photoURL,
+                username: user.displayName,
+                image: imageUrl,
+            });
 
         setInput("");
         setImageUrl("");
@@ -50,18 +51,13 @@ function MessageSender() {
                 </form>
             </div>
             <div className="messageSender__bottom">
-                <div className="messageSender__option">
+                {/* I commented this just in case */}
+                {/* <div className="messageSender__option">
                     <VideocamIcon style={{ color: "red" }} />
                     <h3>Live Video</h3>
-                </div>
-                <div className="messageSender__option">
-                    <PhotoLibraryIcon style={{ color: "green" }} />
-                    <h3>Photo/Video</h3>
-                </div>
-                <div className="messageSender__option">
-                    <InsertEmptionIcon style={{ color: "orange" }} />
-                    <h3>Feeling/Activity</h3>
-                </div>
+                </div> */}
+
+                <Button onClick={handleSubmit}>Post</Button>
             </div>
         </div>
     );
