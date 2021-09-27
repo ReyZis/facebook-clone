@@ -4,6 +4,8 @@ import "./MessageSender.css";
 import VideocamIcon from "@material-ui/icons/Videocam";
 import PhotoLibraryIcon from "@material-ui/icons/PhotoLibrary";
 import InsertEmptionIcon from "@material-ui/icons/InsertEmoticon";
+import CancelIcon from "@material-ui/icons/Cancel";
+import ImageUploading from "react-images-uploading";
 import { useStateValue } from "./StateProvider";
 import db from "./firebase";
 import firebase from "firebase";
@@ -13,6 +15,7 @@ function MessageSender() {
 
     const [input, setInput] = useState("");
     const [imageUrl, setImageUrl] = useState("");
+    const [image, setImage] = useState(null);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -27,6 +30,12 @@ function MessageSender() {
 
         setInput("");
         setImageUrl("");
+    };
+
+    const handleImage = (imageList, addUpdateIndex) => {
+        // data for submit
+        console.log(imageList, addUpdateIndex);
+        setImage(imageList[0]);
     };
 
     return (
@@ -50,15 +59,41 @@ function MessageSender() {
                     </button>
                 </form>
             </div>
-            <div className="messageSender__bottom">
+            <div className="messageSender__middle">
                 {/* I commented this just in case */}
                 {/* <div className="messageSender__option">
-                    <VideocamIcon style={{ color: "red" }} />
-                    <h3>Live Video</h3>
+                    <PhotoLibraryIcon style={{ color: "#00A400" }} />
+                    <h3>Photo</h3>
                 </div> */}
+
+                <ImageUploading
+                    value={image}
+                    onChange={handleImage}
+                    dataURLKey="data_url"
+                >
+                    {({ onImageUpload, isDragging, dragProps }) => (
+                        <div
+                            className="messageSender__option"
+                            onClick={onImageUpload}
+                        >
+                            <PhotoLibraryIcon style={{ color: "#00A400" }} />
+                            <h3>Photo</h3>
+                        </div>
+                    )}
+                </ImageUploading>
 
                 <Button onClick={handleSubmit}>Post</Button>
             </div>
+
+            {image && (
+                <div className="messageSender__bottom">
+                    <img
+                        src={image.data_url}
+                        alt="we couldn't upload your image"
+                    />
+                    <CancelIcon onClick={() => setImage(null)} />
+                </div>
+            )}
         </div>
     );
 }

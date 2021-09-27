@@ -18,6 +18,7 @@
     flex: 1;
     display: flex;
 }
+
 .messageSender__top > form > input {
     outline-width: 0;
     border: none;
@@ -34,7 +35,7 @@
 .messageSender__input {
     flex: 1;
 }
-.messageSender__bottom {
+.messageSender__middle {
     display: flex;
     justify-content: space-evenly;
 }
@@ -43,9 +44,12 @@
     padding: 20px;
     display: flex;
     align-items: center;
+    justify-content: center;
+    flex: 1;
     color: gray;
-    margin: 5px;
+    border-radius: 0 0 15px 15px;
 }
+
 .messageSender__option > h3 {
     font-size: medium;
     margin-left: 10px;
@@ -54,10 +58,9 @@
 
 .messageSender__option:hover {
     background-color: #eff2f5;
-    border-radius: 20px;
 }
 
-.messageSender__bottom > button {
+.messageSender__middle > button {
     padding: 20px;
     border-radius: 0 0 15px 15px;
     display: flex;
@@ -65,4 +68,34 @@
     flex: 1;
     color: #3e81f4;
     font-weight: bold;
+}
+
+.messageSender__bottom {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: fit-content;
+    margin: 5px;
+}
+
+.messageSender__bottom img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+.messageSender__bottom .MuiSvgIcon-root {
+    position: absolute;
+    right: 0;
+    color: white;
+    background-color: black;
+    border-radius: 50px;
+}
+
+@media (max-width: 500px) {
+    .messageSender__top > form > input {
+        padding: 5px 10px;
+        margin: 0 5px;
+    }
 }
