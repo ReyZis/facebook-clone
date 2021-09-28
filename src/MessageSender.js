@@ -7,7 +7,7 @@ import InsertEmptionIcon from "@material-ui/icons/InsertEmoticon";
 import CancelIcon from "@material-ui/icons/Cancel";
 import ImageUploading from "react-images-uploading";
 import { useStateValue } from "./StateProvider";
-import db from "./firebase";
+import db, { storage } from "./firebase";
 import firebase from "firebase";
 
 function MessageSender() {
@@ -17,24 +17,52 @@ function MessageSender() {
     const [imageUrl, setImageUrl] = useState("");
     const [image, setImage] = useState(null);
 
+    const addDoc = (url) => {
+        db.collection("posts").add({
+            message: input,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            profilePic: user.photoURL,
+            username: user.displayName,
+            image: url,
+        });
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        input &&
-            db.collection("posts").add({
-                message: input,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                profilePic: user.photoURL,
-                username: user.displayName,
-                image: imageUrl,
-            });
 
-        setInput("");
-        setImageUrl("");
+        const today = new Date();
+        const name = `${today.getFullYear()}${today.getMonth()}${today.getDate()}${today.getHours()}${today.getMinutes()}${today.getSeconds()}_${Math.floor(
+            Math.random() * 100000
+        )}`;
+
+        if (image || input) {
+            if (image) {
+                storage
+                    .child(name)
+                    .put(image.file)
+                    .on(firebase.storage.TaskEvent.STATE_CHANGED, {
+                        next: () => {
+                            alert("uploading!!");
+                        },
+                        complete: () => {
+                            storage
+                                .child(name)
+                                .getDownloadURL()
+                                .then((url) => addDoc(url));
+                        },
+                    });
+            } else {
+                addDoc(imageUrl);
+            }
+
+            setInput("");
+            setImageUrl("");
+            setImage(null);
+        }
     };
 
     const handleImage = (imageList, addUpdateIndex) => {
         // data for submit
-        console.log(imageList, addUpdateIndex);
         setImage(imageList[0]);
     };
 

@@ -17,13 +17,18 @@ function Post({ profilePic, image, username, timestamp, message }) {
                     <p>{new Date(timestamp?.toDate()).toUTCString()}</p>
                 </div>
             </div>
-            <div className="post__bottom">
-                <p>{message}</p>
-            </div>
 
-            <div className="post__image">
-                <img src={image} />
-            </div>
+            {message && (
+                <div className="post__bottom">
+                    <p>{message}</p>
+                </div>
+            )}
+
+            {image && (
+                <div className="post__image">
+                    <img src={image} />
+                </div>
+            )}
 
             <div className="post__options">
                 <div className="post__option">
