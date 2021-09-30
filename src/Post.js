@@ -86,7 +86,7 @@ function Post({ profilePic, image, username, timestamp, message, id }) {
                 <div className="post__comments">
                     <CommentSender id={id} />
                     {comments.length == 0 ? (
-                        "there in no commentson this post"
+                        "there in no comments on this post"
                     ) : (
                         <>
                             {comments.map((comment) => (
