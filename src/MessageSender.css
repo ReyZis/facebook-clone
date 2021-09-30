@@ -35,6 +35,7 @@
 .messageSender__input {
     flex: 1;
 }
+
 .messageSender__middle {
     display: flex;
     justify-content: space-evenly;
@@ -96,6 +97,15 @@
 @media (max-width: 500px) {
     .messageSender__top > form > input {
         padding: 5px 10px;
-        margin: 0 5px;
+        margin: 5px 5px;
+        height: 40px;
+    }
+
+    .messageSender__top > form {
+        flex-direction: column;
+    }
+
+    .messageSender__input {
+        flex: none;
     }
 }

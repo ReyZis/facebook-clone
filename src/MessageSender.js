@@ -87,6 +87,7 @@ function MessageSender() {
                     </button>
                 </form>
             </div>
+
             <div className="messageSender__middle">
                 {/* I commented this just in case */}
                 {/* <div className="messageSender__option">

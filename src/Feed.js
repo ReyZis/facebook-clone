@@ -34,6 +34,7 @@ function Feed() {
                     username={post.data.username}
                     image={post.data.image}
                     timestamp={post.data.timestamp}
+                    id={post.id}
                 />
             ))}
         </div>

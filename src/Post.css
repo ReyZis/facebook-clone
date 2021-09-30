@@ -63,3 +63,12 @@
     background-color: #eff2f5;
     border-radius: 10px;
 }
+
+.post__comments {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-top: 1px solid lightgray;
+    height: fit-content;
+    padding: 15px 0;
+}
